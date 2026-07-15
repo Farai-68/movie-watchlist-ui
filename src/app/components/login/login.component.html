@@ -1,0 +1,24 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Securely access your movie watchlist</p>
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-box">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="dashboard">
+  <header>
+    <h2>My Watchlist</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </header>
+
+  <div class="add-movie-card">
+    <h3>Add a Movie</h3>
+    <div class="input-row">
+      <input type="text" [(ngModel)]="newTitle" placeholder="Movie Title" required>
+      <input type="text" [(ngModel)]="newDescription" placeholder="Short description (optional)">
+      <button (click)="addMovie()">Add</button>
+    </div>
+  </div>
+
+  <div class="movie-list">
+    <!-- Loop through all movies dynamically -->
+    <div class="movie-card" *ngFor="let movie of movies" [class.watched]="movie.isWatched">
+      
+      <div class="movie-info">
+        <h4>{{ movie.title }}</h4>
+        <p>{{ movie.description }}</p>
+        
+        <!-- STAR RATING SECTION -->
+        <div class="star-rating">
+          <span 
+            *ngFor="let star of [1, 2, 3, 4, 5]" 
+            class="star" 
+            [class.active]="star <= (movie.rating || 0)"
+            (click)="rateMovie(movie, star)">
+            ★
+          </span>
+        </div>
+      </div>
+
+      <div class="movie-actions">
+        <button class="toggle-btn" (click)="toggleWatched(movie)">
+          {{ movie.isWatched ? 'Unwatch' : 'Mark Watched' }}
+        </button>
+        <button class="delete-btn" (click)="deleteMovie(movie.id)">Delete</button>
+      </div>
+    </div>
+    
+    <!-- Show this if the array is completely empty -->
+    <div *ngIf="movies.length === 0" class="empty-state">
+      Your watchlist is empty. Time to add some cinema!
+    </div>
+  </div>
+</div>

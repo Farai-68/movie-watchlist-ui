@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --stormy-dark: #384959;
+  --stormy-base: #6A89A7;
+  --stormy-accent: #88BDF2;
+  --stormy-light: #BDDDFC;
+  --bg-color: #f8f9fa;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--stormy-dark);
+}
