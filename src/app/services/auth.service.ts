@@ -18,4 +18,7 @@ export class AuthService {
       })
     );
   }
+  register(email: string, password: string) {
+    return this.http.post(`${this.baseUrl}/auth/register`, { email, password });
+  }
 }
