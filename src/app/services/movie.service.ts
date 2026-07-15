@@ -13,7 +13,7 @@ export interface Movie {
   providedIn: 'root'
 })
 export class MovieService {
-  private apiUrl = 'https://nest-movie-watchlist.onrender.com';
+  private apiUrl = 'https://nest-movie-watchlist.onrender.com/movies';
 
   constructor(private http: HttpClient) {}
 private getHeaders() {
