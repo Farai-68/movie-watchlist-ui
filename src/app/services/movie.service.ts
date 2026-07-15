@@ -16,11 +16,16 @@ export class MovieService {
   private apiUrl = 'https://nest-movie-watchlist.onrender.com';
 
   constructor(private http: HttpClient) {}
-
-  private getHeaders() {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+private getHeaders() {
+  const token = localStorage.getItem('token');
+  console.log('Sending Token:', token); // Add this line
+  
+  if (!token) {
+    console.error('No token found in localStorage!');
   }
+  
+  return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+}
 
   getMovies() {
     return this.http.get<Movie[]>(this.apiUrl, { headers: this.getHeaders() });
