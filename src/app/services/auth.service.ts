@@ -6,19 +6,22 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  // Use one consistent name
   private apiUrl = 'https://nest-movie-watchlist.onrender.com';
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string; password: string }) {
-    return this.http.post<{ access_token: string }>(`${this.apiUrl}/login`, credentials).pipe(
+    // Corrected to /auth/login
+    return this.http.post<{ access_token: string }>(`${this.apiUrl}/auth/login`, credentials).pipe(
       tap(response => {
-        // This permanently saves the token in the browser so we can use it for the Watchlist later
         localStorage.setItem('token', response.access_token);
       })
     );
   }
+
   register(email: string, password: string) {
-    return this.http.post(`${this.baseUrl}/auth/register`, { email, password });
+    // Corrected to use this.apiUrl
+    return this.http.post(`${this.apiUrl}/auth/register`, { email, password });
   }
 }
