@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'https://nest-movie-watchlist.onrender.com';
 
   constructor(private http: HttpClient) {}
 
