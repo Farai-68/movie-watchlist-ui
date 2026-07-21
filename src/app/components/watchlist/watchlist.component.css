@@ -2,6 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: 100svh; /* Keeps background consistent on mobile */
 }
 
 header {
@@ -11,6 +12,8 @@ header {
   margin-bottom: 2rem;
   border-bottom: 3px solid var(--stormy-base);
   padding-bottom: 1rem;
+  flex-wrap: wrap; /* Prevents header overlap on mobile */
+  gap: 1rem;
 }
 
 .logout-btn {
@@ -18,7 +21,7 @@ header {
   color: var(--stormy-dark);
   border: 2px solid var(--stormy-dark);
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: 6px; /* Matched auth pages */
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
@@ -32,8 +35,8 @@ header {
 .add-movie-card {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(56, 73, 89, 0.1);
+  border-radius: 12px; /* Matched auth pages */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Matched auth pages */
   margin-bottom: 2rem;
   border-left: 5px solid var(--stormy-accent);
 }
@@ -44,13 +47,16 @@ header {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap; /* Fixes mobile overflow */
 }
 
 .input-row input {
   flex: 1;
-  padding: 0.75rem;
+  min-width: 200px; /* Prevents shrinking too much */
+  padding: 12px; /* Touch-friendly size */
   border: 1px solid var(--stormy-light);
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 16px; /* Prevents iOS auto-zoom */
 }
 
 .input-row input:focus {
@@ -60,27 +66,43 @@ header {
 }
 
 .input-row button {
-  padding: 0 1.5rem;
+  padding: 12px 1.5rem;
   background-color: var(--stormy-base);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  width: 100%; /* Default to full width on mobile */
+}
+
+@media (min-width: 600px) {
+  .input-row button {
+    width: auto; /* Side-by-side on desktop */
+  }
 }
 
 .input-row button:hover { background-color: var(--stormy-dark); }
 
+/* --- THE FIX FOR THE CARD OVERFLOW --- */
 .movie-card {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(56, 73, 89, 0.05);
+  border-radius: 12px; /* Matched auth pages */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Matched auth pages */
   margin-bottom: 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stacks contents on mobile so they fit */
+  gap: 1rem; /* Space between text and buttons */
   transition: all 0.3s ease;
+}
+
+@media (min-width: 600px) {
+  .movie-card {
+    flex-direction: row; /* Puts them side-by-side on desktop */
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .movie-card.watched {
@@ -96,16 +118,26 @@ header {
 .movie-info h4 { margin: 0 0 0.5rem 0; color: var(--stormy-dark); font-size: 1.2rem;}
 .movie-info p { margin: 0; color: #6c757d; font-size: 0.95rem; }
 
-.movie-actions { display: flex; gap: 0.5rem; }
+.movie-actions { 
+  display: flex; 
+  gap: 0.5rem; 
+  flex-wrap: wrap; /* Allows buttons to wrap safely */
+}
+
+.toggle-btn, .delete-btn {
+  flex: 1; /* Makes buttons equal width on mobile */
+  padding: 12px 1rem; /* Touch-friendly */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
 
 .toggle-btn {
   background-color: var(--stormy-light);
   color: var(--stormy-dark);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
 }
 
 .toggle-btn:hover { background-color: var(--stormy-accent); }
@@ -113,11 +145,6 @@ header {
 .delete-btn {
   background-color: #ffebee;
   color: #c62828;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
 }
 
 .delete-btn:hover { background-color: #ef5350; color: white; }
@@ -127,9 +154,10 @@ header {
   padding: 3rem;
   color: var(--stormy-base);
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 2px dashed var(--stormy-light);
 }
+
 /* Star Rating Styles */
 .star-rating {
   margin-top: 0.5rem;
@@ -139,7 +167,7 @@ header {
 
 .star {
   font-size: 1.5rem;
-  color: #cbd5e1; /*Darkened gray for visibility */
+  color: #cbd5e1; 
   cursor: pointer;
   transition: transform 0.2s, color 0.2s;
   user-select: none;
@@ -147,9 +175,9 @@ header {
 
 .star:hover {
   transform: scale(1.2);
-  color: #f39c12; /* Subtle gold on hover */
+  color: #f39c12; 
 }
 
 .star.active {
-  color: #f1c40f; /* Bright gold when rated */
+  color: #f1c40f; 
 }
