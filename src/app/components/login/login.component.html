@@ -1,31 +1,39 @@
 <div class="login-container">
   <div class="login-card">
-    <h2>Welcome Back</h2>
-    <p class="subtitle">Securely access your movie watchlist</p>
-    
-    <form (ngSubmit)="onSubmit()">
-     
+    <div class="card-header">
+      <h2>Welcome Back</h2>
+      <p>Sign in to manage your watchlist</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()">
       <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" [(ngModel)]="email" required>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="you@example.com">
       </div>
-      
+
       <div class="input-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required placeholder="••••••••">
+      </div>
+
+      <!-- New Industry-Standard Row -->
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" name="rememberMe"> Remember me
+        </label>
+        
+        <a routerLink="/forgot-password" class="forgot-link">Forgot password?</a>
       </div>
 
       <div *ngIf="errorMessage" class="error-box">
         {{ errorMessage }}
       </div>
 
-      <button type="submit">Sign In</button>
+      <button type="submit" class="btn-primary">Sign In</button>
     </form>
 
-    
-    <div class="register-link" style="margin-top: 15px; text-align: center;">
-      <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+    <div class="card-footer">
+      <p>Don't have an account? <a routerLink="/register">Sign up here</a></p>
     </div>
-
   </div>
 </div>
