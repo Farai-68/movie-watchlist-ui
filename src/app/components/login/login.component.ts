@@ -1,31 +1,37 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   email = '';
   password = '';
+  rememberMe = false; 
   errorMessage = '';
+  isLoading = false; 
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
+  onLogin() {
+    this.isLoading = true; 
+    this.errorMessage = ''; 
+
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        console.log('Login successful! JWT stored.');
+        
         this.router.navigate(['/watchlist']);
       },
-      error: (err: any) => { // Added : any to fix the TS7006 error
-        this.errorMessage = 'Invalid email or password. The bouncer says no.';
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = 'Invalid email or password';
       }
     });
   }
