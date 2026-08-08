@@ -18,7 +18,7 @@ export class MovieService {
   constructor(private http: HttpClient) {}
 private getHeaders() {
   const token = localStorage.getItem('token');
-  console.log('Sending Token:', token); // Add this line
+  console.log('Sending Token:', token);
   
   if (!token) {
     console.error('No token found in localStorage!');

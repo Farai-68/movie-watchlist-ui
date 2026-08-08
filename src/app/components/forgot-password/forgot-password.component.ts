@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,13 +15,29 @@ export class ForgotPasswordComponent {
   email = '';
   successMessage = '';
   errorMessage = '';
+  isLoading = false;
+
+  constructor(private authService: AuthService) {}
 
   onSubmit() {
-    if (this.email) {
-      this.successMessage = 'If an account exists, a reset link has been sent.';
-      this.errorMessage = '';
-    } else {
+    if (!this.email) {
       this.errorMessage = 'Please enter a valid email address.';
+      return;
     }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    this.authService.forgotPassword(this.email).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.successMessage = 'If an account exists, a reset link has been sent.';
+      },
+      error: () => {
+        this.isLoading = false;
+        this.errorMessage = 'Something went wrong. Please try again.';
+      }
+    });
   }
 }
