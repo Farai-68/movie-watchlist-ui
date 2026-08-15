@@ -6,19 +6,27 @@
     <form (ngSubmit)="onRegister()">
       <div class="input-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" [(ngModel)]="email" required>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="you@example.com">
       </div>
 
       <div class="input-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+        <div style="display: flex; align-items: center; position: relative;">
+
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password" required placeholder="••••••••" style="width: 100%; padding-right: 60px;">
+          <button type="button" (click)="showPassword = !showPassword" style="position: absolute; right: 10px; background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #555;">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
       </div>
 
       <div *ngIf="errorMessage" class="error-box">
         {{ errorMessage }}
       </div>
 
-      <button type="submit">Register</button>
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Registering...' : 'Register' }}
+      </button>
     </form>
 
     <div class="register-link" style="margin-top: 15px; text-align: center;">

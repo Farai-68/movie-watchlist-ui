@@ -16,17 +16,23 @@ export class RegisterComponent {
   email = '';
   password = '';
   errorMessage = '';
+  isLoading = false; // Added loading state
+  showPassword = false; // Added to toggle password visibility
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onRegister() {
+    this.isLoading = true;
+    this.errorMessage = '';
+
     this.authService.register(this.email, this.password).subscribe({
       next: () => {
-        // Redirect to login after successful registration
+        this.isLoading = false;
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        this.errorMessage = 'Registration failed. Try a different email.';
+        this.isLoading = false;
+        this.errorMessage = 'Registration failed. Please try a different email or try again later.';
       }
     });
   }

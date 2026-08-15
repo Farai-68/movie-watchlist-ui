@@ -17,6 +17,7 @@ export class LoginComponent {
   rememberMe = false; 
   errorMessage = '';
   isLoading = false; 
+  showPassword = false; // Added to toggle password visibility
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -26,12 +27,12 @@ export class LoginComponent {
 
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        
+        this.isLoading = false;
         this.router.navigate(['/watchlist']);
       },
       error: (err) => {
-        this.isLoading = false;
-        this.errorMessage = 'Invalid email or password';
+        this.isLoading = false; 
+        this.errorMessage = 'Incorrect email or password. Please check your details and try again.';
       }
     });
   }

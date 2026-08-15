@@ -31,12 +31,12 @@ export class ForgotPasswordComponent {
 
     this.authService.forgotPassword(this.email).subscribe({
       next: () => {
-        this.isLoading = false;
-        this.successMessage = 'If an account exists, a reset link has been sent.';
+        this.isLoading = false; 
+        this.successMessage = 'If an account exists, a reset link will be sent to it shortly.';
       },
       error: () => {
-        this.isLoading = false;
-        this.errorMessage = 'Something went wrong. Please try again.';
+        this.isLoading = false; 
+        this.errorMessage = 'Something went wrong. Please check your connection and try again.';
       }
     });
   }
