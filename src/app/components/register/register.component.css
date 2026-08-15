@@ -2,19 +2,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Use 100svh (small viewport height) to account for mobile browser UI bars */
-  min-height: 100svh; 
+  min-height: 100svh;
   padding: 20px;
-  background-color: #f4f7f6; /* Optional: adds a background color for contrast */
+  background-color: #f4f7f6;
 }
 
 .login-card {
   background: white;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.subtitle {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.95rem;
 }
 
 .input-group {
@@ -24,20 +39,76 @@
 .input-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: #34495e;
+  font-size: 0.9rem;
 }
+
 
 .input-group input {
   width: 100%;
-  padding: 12px; /* Increased padding for easier touching */
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
-  /* IMPORTANT: font-size 16px stops iOS from zooming in when you tap an input */
-  font-size: 16px; 
-  box-sizing: border-box; /* Ensures padding doesn't break layout */
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
 }
 
-button {
+.input-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+
+.password-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  width: 100%;
+  padding-right: 90px; 
+  box-sizing: border-box;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: #555;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  
+  padding: 0;
+  width: auto;
+  min-width: auto;
+  height: 34px;
+}
+
+
+.error-box {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+.btn-primary {
   width: 100%;
   padding: 12px;
   background-color: #007bff;
@@ -46,12 +117,34 @@ button {
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
+  transition: background-color 0.2s;
 }
 
-.error-box {
-  color: red;
-  margin-bottom: 1rem;
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-primary:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+
+.card-footer {
+  margin-top: 1.5rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.card-footer a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.card-footer a:hover {
+  text-decoration: underline;
 }

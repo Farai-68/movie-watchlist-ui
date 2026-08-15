@@ -1,37 +1,61 @@
 <div class="login-container">
   <div class="login-card">
-    <h2>Create Account</h2>
-    <p class="subtitle">Join our movie watchlist community</p>
+    <div class="card-header">
+      <h2>Create Account</h2>
+      <p class="subtitle">Join our movie watchlist community</p>
+    </div>
 
     <form (ngSubmit)="onRegister()">
       <div class="input-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="you@example.com">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          placeholder="you@example.com"
+        />
       </div>
 
       <div class="input-group">
-              <label for="password">Password</label>
-              
-              <div style="position: relative; width: 100%;">
-                <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password" required placeholder="••••••••" style="width: 100%; box-sizing: border-box; padding-right: 60px;">
-                
-                <button type="button" (click)="showPassword = !showPassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #555; padding: 0;">
-                  {{ showPassword ? 'Hide' : 'Show' }}
-                </button>
-              </div>
-            </div>
+        <label for="password">Password</label>
+
+        <div class="password-row">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            placeholder="••••••••"
+            class="password-input"
+          />
+
+          <button
+            type="button"
+            class="toggle-btn"
+            (click)="showPassword = !showPassword"
+          >
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+      </div>
 
       <div *ngIf="errorMessage" class="error-box">
         {{ errorMessage }}
       </div>
 
-      <button type="submit" [disabled]="isLoading">
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
         {{ isLoading ? 'Registering...' : 'Register' }}
       </button>
     </form>
 
-    <div class="register-link" style="margin-top: 15px; text-align: center;">
-      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    <div class="card-footer">
+      <p>
+        Already have an account?
+        <a routerLink="/login">Login here</a>
+      </p>
     </div>
   </div>
 </div>
