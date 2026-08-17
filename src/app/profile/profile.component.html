@@ -1,0 +1,37 @@
+<div class="login-container">
+  <div class="login-card" style="max-width: 500px;">
+    <div class="card-header">
+      <h2>Profile & Settings</h2>
+      <p>Manage your account preferences</p>
+    </div>
+
+    <div class="profile-section" style="margin-bottom: 30px; text-align: left;">
+      <h3 style="font-size: 1.1rem; color: #333; margin-bottom: 10px;">Account Details</h3>
+      <div class="input-group">
+        <label>Email Address</label>
+        <div style="padding: 10px; background: #f5f5f5; border-radius: 5px; color: #555;">
+          {{ userEmail }}
+        </div>
+      </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="danger-zone" style="text-align: left;">
+      <h3 style="font-size: 1.1rem; color: #d93025; margin-bottom: 10px;">Danger Zone</h3>
+      <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">
+        Permanently delete your account and all associated watchlist data. This cannot be undone.
+      </p>
+      <button 
+        (click)="onDeleteAccount()" 
+        [disabled]="isLoading"
+        style="background-color: #d93025; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">
+        {{ isLoading ? 'Deleting...' : 'Delete Account' }}
+      </button>
+    </div>
+
+    <div class="card-footer" style="margin-top: 20px;">
+      <a routerLink="/watchlist" style="color: #555; text-decoration: none;">&larr; Back to Watchlist</a>
+    </div>
+  </div>
+</div>
