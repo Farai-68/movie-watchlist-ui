@@ -1,30 +1,54 @@
-.dashboard {
-  max-width: 800px;
+/* --- OVERALL DASHBOARD --- */
+.dashboard-container {
+  max-width: 1200px; /* Widened to allow the grid to fit multiple cards */
   margin: 0 auto;
   padding: 2rem;
-  min-height: 100svh; /* Keeps background consistent on mobile */
+  min-height: 100svh;
 }
 
-header {
+/* --- HEADER --- */
+.dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
   border-bottom: 3px solid var(--stormy-base);
   padding-bottom: 1rem;
-  flex-wrap: wrap; /* Prevents header overlap on mobile */
+  flex-wrap: wrap; 
   gap: 1rem;
 }
+
+.header-brand h2 { 
+  margin: 0; 
+  color: var(--stormy-dark); 
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.profile-btn {
+  background-color: var(--stormy-light);
+  color: var(--stormy-dark);
+  border: 2px solid transparent;
+}
+
+.profile-btn:hover { background-color: var(--stormy-accent); }
 
 .logout-btn {
   background-color: transparent;
   color: var(--stormy-dark);
   border: 2px solid var(--stormy-dark);
-  padding: 0.5rem 1rem;
-  border-radius: 6px; /* Matched auth pages */
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
 }
 
 .logout-btn:hover {
@@ -32,31 +56,29 @@ header {
   color: white;
 }
 
+/* --- ADD MOVIE SECTION --- */
 .add-movie-card {
   background: white;
   padding: 1.5rem;
-  border-radius: 12px; /* Matched auth pages */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Matched auth pages */
+  border-radius: 12px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
   margin-bottom: 2rem;
   border-left: 5px solid var(--stormy-accent);
 }
 
-.add-movie-card h3 { margin-top: 0; color: var(--stormy-dark); }
-
 .input-row {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
-  flex-wrap: wrap; /* Fixes mobile overflow */
+  flex-wrap: wrap;
 }
 
 .input-row input {
   flex: 1;
-  min-width: 200px; /* Prevents shrinking too much */
-  padding: 12px; /* Touch-friendly size */
+  min-width: 200px;
+  padding: 12px;
   border: 1px solid var(--stormy-light);
   border-radius: 6px;
-  font-size: 16px; /* Prevents iOS auto-zoom */
+  font-size: 16px;
 }
 
 .input-row input:focus {
@@ -65,119 +87,136 @@ header {
   box-shadow: 0 0 0 2px rgba(136, 189, 242, 0.3);
 }
 
-.input-row button {
+.action-btn {
   padding: 12px 1.5rem;
-  background-color: var(--stormy-base);
-  color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  width: 100%; /* Default to full width on mobile */
+  transition: all 0.2s ease;
+}
+
+.add-btn { 
+  background-color: var(--stormy-base); 
+  color: white; 
+  width: 100%;
 }
 
 @media (min-width: 600px) {
-  .input-row button {
-    width: auto; /* Side-by-side on desktop */
-  }
+  .add-btn { width: auto; }
 }
 
-.input-row button:hover { background-color: var(--stormy-dark); }
+.add-btn:hover { background-color: var(--stormy-dark); }
 
-/* --- THE FIX FOR THE CARD OVERFLOW --- */
+
+/* --- GRID & CATEGORIES --- */
+.category-title { 
+  color: var(--stormy-dark); 
+  margin-bottom: 1.5rem; 
+  border-bottom: 2px solid var(--stormy-light); 
+  padding-bottom: 0.5rem; 
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
 .movie-card {
   background: white;
   padding: 1.5rem;
-  border-radius: 12px; /* Matched auth pages */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Matched auth pages */
-  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Stacks contents on mobile so they fit */
-  gap: 1rem; /* Space between text and buttons */
-  transition: all 0.3s ease;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-@media (min-width: 600px) {
-  .movie-card {
-    flex-direction: row; /* Puts them side-by-side on desktop */
-    justify-content: space-between;
-    align-items: center;
-  }
+.movie-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
 }
 
-.movie-card.watched {
-  background-color: #e9ecef;
-  opacity: 0.7;
+.movie-card.watched { 
+  background-color: #e9ecef; 
+  opacity: 0.7; 
 }
 
-.movie-card.watched h4 {
-  text-decoration: line-through;
-  color: var(--stormy-base);
+.movie-card.watched h4 { 
+  text-decoration: line-through; 
+  color: var(--stormy-base); 
 }
 
-.movie-info h4 { margin: 0 0 0.5rem 0; color: var(--stormy-dark); font-size: 1.2rem;}
-.movie-info p { margin: 0; color: #6c757d; font-size: 0.95rem; }
+.card-content h4 { 
+  margin: 0 0 0.5rem 0; 
+  color: var(--stormy-dark); 
+  font-size: 1.2rem; 
+}
 
-.movie-actions { 
+.card-content p { 
+  margin: 0 0 1rem 0; 
+  color: #6c757d; 
+  font-size: 0.95rem; 
+  min-height: 40px; 
+}
+
+/* --- STAR RATING --- */
+.star-rating { 
+  display: flex; 
+  gap: 0.2rem; 
+  margin-bottom: 1rem; 
+}
+
+.star { 
+  font-size: 1.5rem; 
+  color: #cbd5e1; 
+  cursor: pointer; 
+  transition: transform 0.2s, color 0.2s; 
+  user-select: none; 
+}
+
+.star:hover { transform: scale(1.2); color: #f39c12; }
+.star.active { color: #f1c40f; }
+
+/* --- CARD BUTTONS --- */
+.card-actions { 
   display: flex; 
   gap: 0.5rem; 
-  flex-wrap: wrap; /* Allows buttons to wrap safely */
+  flex-wrap: wrap; 
 }
 
-.toggle-btn, .delete-btn {
-  flex: 1; /* Makes buttons equal width on mobile */
-  padding: 12px 1rem; /* Touch-friendly */
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
+.watch-btn, .unwatch-btn, .delete-btn { 
+  flex: 1; 
+  padding: 12px 1rem; 
+  font-size: 14px; 
+  text-align: center; 
 }
 
-.toggle-btn {
-  background-color: var(--stormy-light);
-  color: var(--stormy-dark);
+.watch-btn, .unwatch-btn { 
+  background-color: var(--stormy-light); 
+  color: var(--stormy-dark); 
 }
 
-.toggle-btn:hover { background-color: var(--stormy-accent); }
+.watch-btn:hover, .unwatch-btn:hover { background-color: var(--stormy-accent); }
 
-.delete-btn {
-  background-color: #ffebee;
-  color: #c62828;
+.delete-btn { 
+  background-color: #ffebee; 
+  color: #c62828; 
 }
 
-.delete-btn:hover { background-color: #ef5350; color: white; }
-
-.empty-state {
-  text-align: center;
-  padding: 3rem;
-  color: var(--stormy-base);
-  background: white;
-  border-radius: 12px;
-  border: 2px dashed var(--stormy-light);
+.delete-btn:hover { 
+  background-color: #ef5350; 
+  color: white; 
 }
 
-/* Star Rating Styles */
-.star-rating {
-  margin-top: 0.5rem;
-  display: flex;
-  gap: 0.2rem;
-}
-
-.star {
-  font-size: 1.5rem;
-  color: #cbd5e1; 
-  cursor: pointer;
-  transition: transform 0.2s, color 0.2s;
-  user-select: none;
-}
-
-.star:hover {
-  transform: scale(1.2);
-  color: #f39c12; 
-}
-
-.star.active {
-  color: #f1c40f; 
+.empty-state { 
+  text-align: center; 
+  padding: 3rem; 
+  color: var(--stormy-base); 
+  background: white; 
+  border-radius: 12px; 
+  border: 2px dashed var(--stormy-light); 
 }

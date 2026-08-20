@@ -1,49 +1,85 @@
-<div class="dashboard">
-  <header>
-    <h2>My Watchlist</h2>
-    <button class="logout-btn" (click)="logout()">Logout</button>
+<div class="dashboard-container">
+  
+  <!-- HEADER -->
+  <header class="dashboard-header">
+    <div class="header-brand">
+      <h2>🎬 My Watchlist</h2>
+    </div>
+    <div class="header-actions">
+      <!-- The new Profile button  -->
+      <button class="nav-btn profile-btn" routerLink="/profile">⚙️ Profile & Settings</button>
+      <button class="nav-btn logout-btn" (click)="logout()">Logout</button>
+    </div>
   </header>
 
-  <div class="add-movie-card">
-    <h3>Add a Movie</h3>
-    <div class="input-row">
-      <input type="text" [(ngModel)]="newTitle" placeholder="Movie Title" required>
-      <input type="text" [(ngModel)]="newDescription" placeholder="Short description (optional)">
-      <button (click)="addMovie()">Add</button>
-    </div>
-  </div>
-
-  <div class="movie-list">
-    <!-- Loop through all movies dynamically -->
-    <div class="movie-card" *ngFor="let movie of movies" [class.watched]="movie.isWatched">
-      
-      <div class="movie-info">
-        <h4>{{ movie.title }}</h4>
-        <p>{{ movie.description }}</p>
-        
-        <!-- STAR RATING SECTION -->
-        <div class="star-rating">
-          <span 
-            *ngFor="let star of [1, 2, 3, 4, 5]" 
-            class="star" 
-            [class.active]="star <= (movie.rating || 0)"
-            (click)="rateMovie(movie, star)">
-            ★
-          </span>
-        </div>
-      </div>
-
-      <div class="movie-actions">
-        <button class="toggle-btn" (click)="toggleWatched(movie)">
-          {{ movie.isWatched ? 'Unwatch' : 'Mark Watched' }}
-        </button>
-        <button class="delete-btn" (click)="deleteMovie(movie.id)">Delete</button>
+  <!-- ADD MOVIE SECTION (CREATE) -->
+  <section class="add-movie-section">
+    <div class="add-movie-card">
+      <div class="input-row">
+        <input type="text" [(ngModel)]="newTitle" placeholder="Movie Title (e.g. Spider-Man)" required>
+        <input type="text" [(ngModel)]="newDescription" placeholder="Short description (optional)">
+        <button class="action-btn add-btn" (click)="addMovie()">+ Add Movie</button>
       </div>
     </div>
+  </section>
+
+  <!-- WATCHLIST CONTENT -->
+  <section class="movie-categories">
     
-    <!-- Show this if the array is completely empty -->
+    <!-- Show this if the entire list is empty -->
     <div *ngIf="movies.length === 0" class="empty-state">
-      Your watchlist is empty. Time to add some cinema!
+      Your watchlist is completely empty. Time to add some cinema!
     </div>
-  </div>
+
+    <!-- CATEGORY 1: UP NEXT (Unwatched Movies) -->
+    <div class="category-block" *ngIf="movies.length > 0">
+      <h3 class="category-title">⏳ Up Next</h3>
+      <div class="movie-grid">
+        <ng-container *ngFor="let movie of movies">
+          <div class="movie-card" *ngIf="!movie.isWatched">
+            
+            <div class="card-content">
+              <h4>{{ movie.title }}</h4>
+              <p>{{ movie.description }}</p>
+              <div class="star-rating">
+                <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.active]="star <= (movie.rating || 0)" (click)="rateMovie(movie, star)">★</span>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="action-btn watch-btn" (click)="toggleWatched(movie)">✓ Mark Watched</button>
+              <button class="action-btn delete-btn" (click)="deleteMovie(movie.id)">🗑️ Delete</button>
+            </div>
+
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- CATEGORY 2: FINISHED (Watched Movies) -->
+    <div class="category-block" *ngIf="movies.length > 0">
+      <h3 class="category-title">✅ Finished</h3>
+      <div class="movie-grid">
+        <ng-container *ngFor="let movie of movies">
+          <div class="movie-card watched" *ngIf="movie.isWatched">
+            
+            <div class="card-content">
+              <h4>{{ movie.title }}</h4>
+              <p>{{ movie.description }}</p>
+              <div class="star-rating">
+                <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.active]="star <= (movie.rating || 0)" (click)="rateMovie(movie, star)">★</span>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="action-btn unwatch-btn" (click)="toggleWatched(movie)">↺ Unwatch</button>
+              <button class="action-btn delete-btn" (click)="deleteMovie(movie.id)">🗑️ Delete</button>
+            </div>
+
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+  </section>
 </div>

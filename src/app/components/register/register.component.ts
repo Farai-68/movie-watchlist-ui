@@ -1,8 +1,8 @@
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class RegisterComponent {
   email = '';
   password = '';
   errorMessage = '';
-  isLoading = false; // Added loading state
-  showPassword = false; // Added to toggle password visibility
+  isLoading = false;
+  showPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -32,7 +32,8 @@ export class RegisterComponent {
       },
       error: (err) => {
         this.isLoading = false;
-        this.errorMessage = 'Registration failed. Please try a different email or try again later.';
+        this.errorMessage =
+          err?.error?.message || 'Registration failed. Please try a different email or try again later.';
       }
     });
   }

@@ -44,7 +44,7 @@
   font-size: 0.9rem;
 }
 
-
+/* Normal inputs */
 .input-group input {
   width: 100%;
   padding: 12px;
@@ -61,7 +61,7 @@
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
-
+/* Password toggle layout */
 .password-row {
   position: relative;
   width: 100%;
@@ -71,7 +71,7 @@
 
 .password-input {
   width: 100%;
-  padding-right: 90px; 
+  padding-right: 90px; /* reserves space so the toggle won't cover the text */
   box-sizing: border-box;
 }
 
@@ -89,14 +89,15 @@
   font-size: 0.85rem;
   font-weight: 500;
 
-  
-  padding: 0;
-  width: auto;
-  min-width: auto;
+  /* prevent any global styling from ruining width/box */
+  width: auto !important;
+  min-width: auto !important;
+  padding: 0 !important;
   height: 34px;
+  line-height: 34px;
 }
 
-
+/* Error box */
 .error-box {
   background-color: #fee2e2;
   color: #dc2626;
@@ -107,7 +108,7 @@
   font-size: 14px;
 }
 
-
+/* Primary button */
 .btn-primary {
   width: 100%;
   padding: 12px;
@@ -131,7 +132,7 @@
   opacity: 0.7;
 }
 
-
+/* Footer link */
 .card-footer {
   margin-top: 1.5rem;
   text-align: center;
